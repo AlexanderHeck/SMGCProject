@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-FastawriterPKS.py
+CytoscapeCSV_editor.py
 
 Description: This program is designed to append a network node file exported from Cytoscape with information
              about the entries organisms and gene cluster family. It is thus intented for downstream
@@ -39,14 +39,9 @@ import pandas as pd
 import sys
 
 #%% Take command line arguments
-#Filename=sys.argv[1]
-#Clusteringfile=sys.argv[2]
-#Annotationfile=sys.argv[3]
-
-
-Filename=(r"C:\Users\heck-\Documents\Uni\FungiProject\Bigscape\Output_final\output_files\2025-12-16_13-31-07_c0.3\terpene\terpene_c0.3.network default node.csv")
-Clusteringfile=(r"C:\Users\heck-\Documents\Uni\FungiProject\Bigscape\Output_final\output_files\2025-12-16_13-31-07_c0.3\terpene\terpene_clustering_c0.3.tsv")
-Annotationfile=(r"C:\Users\heck-\Documents\Uni\FungiProject\Bigscape\Output_final\output_files\2025-12-16_13-31-07_c0.3\record_annotations.tsv")
+Filename=sys.argv[1]
+Clusteringfile=sys.argv[2]
+Annotationfile=sys.argv[3]
 
 #%% Open input file
 
@@ -56,14 +51,14 @@ annotation = pd.read_csv(Annotationfile, sep='\t', index_col="Record")
 
 #%% Write Output file
 
-data["Organism"]="n.a."
-data["Family"]="n.a."
-namelist=data.index.tolist()
+data["Organism"]="n.a."         # introduce a new column called Organism
+data["Family"]="n.a."           # introcude a new column called Family
+namelist=data.index.tolist()    # initiate a list of all species names
 
-for name in namelist:
+for name in namelist:           # iterate through the name list and write both the corresponding organism and family in the correct row
     organism=annotation.loc[name, "Organism"]
     data.loc[name, "Organism"]=organism
     family=cluster.loc[name, "Family"]
     data.loc[name, "Family"]=family
     
-data.to_csv(Filename)
+data.to_csv(Filename)           # export the dataframe to a csv

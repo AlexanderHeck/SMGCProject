@@ -21,7 +21,7 @@ Procedure:
 Input: Input excel
 Output: heatmap_SMGC.png
     
-Usage: python3 FastaAlignerPlotter.py input_table.xlsx
+Usage: python3 SMGC_Heatmap.py input_table.xlsx
 
 Version: 1.00
 Date: 2022-12-19
