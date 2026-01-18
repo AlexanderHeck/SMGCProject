@@ -2,10 +2,10 @@
 
 This project used a combination of exising software tools and self written programs to establish a workflow from raw annotated genome data to identifies secondary metabolite gene clusters, families of clusters, and a phylogeny of their respective core biosynthetic genes.
 
-This README will cover every part of that workflow with a focus on the self written programs. The documentation for the existing software tools will be linked. All scripts including the analysis can be accessed in the scripts folder. The excel file SecondMetaProjectsResults_withgeneID.xlxs contains all data derived from the AntiSMASH results. Due to their size the raw AntiSMASH and BiG-SCAPE files could not be uploaded to Git-Hub but can be accessed on request under the email-adress al4118he-s@student.lu.se.
+This README will cover every part of that workflow with a focus on the self written programs. The documentation for the existing software tools will be linked. All scripts including the analysis can be accessed in the scripts folder. The excel file SecondMetaProjectsResults_withgeneID.xlxs contains all data derived from the AntiSMASH results. Due to their size the raw AntiSMASH and BiG-SCAPE files could not be uploaded to Git-Hub but can be accessed on request under the email-address al4118he-s@student.lu.se.
 
-Different Programs are used in the following order:
-1. Genomic data is given to AntiSMASH which identifies SMGCs in the Genomes
+The different programs are used in the following order:
+1. Genomic data is given to AntiSMASH which identifies SMGCs in the genomes
 2. Data derived from the AntiSMASH results are recorded in the excel table SecondMetaProjectsResults_withgeneID.xlxs
 3. The raw data from AntiSMASH is given to BiG-SCAPE to identify families of clusters
 4. The cluster files from BiG-SCAPE are downloaded to be visualized in Cytoscape, the program Cytoscape_CSV_editor.py is employed to append these files with species names
@@ -27,7 +27,7 @@ conda activate bigscape
 The genomes for the selected species were found using the NCBI genome browser https://www.ncbi.nlm.nih.gov/datasets/genome/ (more information about specific strains and accession number used can be found under SecondMetaProjectsResults_withgeneID.xlxs). 
 AntiSMASH can be accessed freely under https://fungismash.secondarymetabolites.org/#!/start . Relaxed detection strictness was applied. More information can be accessed in AntiSMASHs own documentation under https://docs.antismash.secondarymetabolites.org/intro/.
 
-All AntiSMASH results files were safed offline in the folder "Results":
+All AntiSMASH results files were saved offline in the folder "Results":
 
 ```bash
 mkdir Results
@@ -60,7 +60,7 @@ bigscape cluster -i ../Results -o Testruns/Output1/ -p pfam/Pfam-A.hmm -v --incl
 bigscape cluster -i ../Results -o Testruns/Output2/ -p pfam/Pfam-A.hmm -v --include-singletons --alignment-mode auto
 ```
 
-3. Extend strategy: simple Match
+3. Extend strategy: simple match
 
 ```bash
 bigscape cluster -i ../Results -o Testruns/Output3/ -p pfam/Pfam-A.hmm -v --include-singletons --extend-strategy simple_match
@@ -107,7 +107,7 @@ bigscape cluster -i ../Results/ -o Output_final_nosingletons/ -p pfam/Pfam-A.hmm
 
 The BiG-SCAPE clusters were downloaded and visualized in Cytoscape according to https://github.com/medema-group/BiG-SCAPE/wiki/12.-Tutorials#loading-big-scape-output-into-cytoscape .
 
-However, the network files created by BiG-SCAPE only contain information about the NCBI genome accession number, not however the species, the self written program CytoscapeCSV_editor.py was used to append that table with species names and family and add them in cytoscape as labels. More information on Cytoscape can be accessed here: https://cytoscape.org/
+However, the network files created by BiG-SCAPE only contain information about the NCBI genome accession number, not however the species. The self written program CytoscapeCSV_editor.py was used to append that table with species names and family and add them in cytoscape as labels. More information on Cytoscape can be accessed here: https://cytoscape.org/
 
 Script: CytoscapeCSV_editor.py
 
